@@ -1,6 +1,6 @@
 import React from "react";
-import { CiLocationOn, CiDeliveryTruck } from "react-icons/ci";
-import { CiDiscount1 } from "react-icons/ci";
+import { CiDiscount1, CiShoppingCart, CiUser, CiSearch, CiLocationOn, CiDeliveryTruck } from "react-icons/ci";
+import { BsListUl } from "react-icons/bs";
 
 const NavBar = () => {
   return (
@@ -22,7 +22,30 @@ const NavBar = () => {
           <a href="#" className="text-xs">All Offers</a>
         </div>
       </div>
-      <div>Navbar</div>
+      <div className="navbar p-0">
+  <div className="navbar-start w-1/4">
+    <a className="normal-case text-xl cursor-pointer text-[#008ECC] font-medium">Fakhrul Mart</a>
+  </div>
+  <div className="navbar-center w-1/2 relative">
+  <CiSearch className="absolute left-2 text-[#008ECC] text-lg" />
+  <input type="text" placeholder="Search essentials, groceries and more..." className="input input-bordered input-info w-5/6 px-8" />
+  <BsListUl className="absolute right-24 text-[#008ECC] text-lg" />
+  </div>
+  <div className="navbar-end w-1/4 hidden lg:flex gap-4">
+  <div className="flex-none flex gap-1 items-center">
+        <CiShoppingCart className="text-[#008ECC] text-lg" />
+          <a href="#" className="text-sm font-medium">Cart</a>
+        </div>
+        <div className="flex-none flex gap-1 items-center">
+        <CiUser className="text-[#008ECC] text-lg" />
+          <a href="#" className="text-sm font-medium">Sign Up/Sign in</a>
+        </div>
+        <div className="flex-none flex gap-1 items-center">
+        <CiUser className="text-[#008ECC] text-lg" />
+          <a href="#" className="text-sm font-medium">Admin</a>
+        </div>
+  </div>
+</div>
     </nav>
   );
 };
