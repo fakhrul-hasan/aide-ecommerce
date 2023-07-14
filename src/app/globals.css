@@ -1,8 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+  --swiper-navigation-size: 15px!important;
+}
 
 *{
   margin: 0;
   padding: 0;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  top: 10px!important;
+  font-weight: 600!important;
+  color: #008ECC!important;
+}
+.swiper-button-prev {
+  left: auto!important;
+  right: 30px!important; /* Adjust the left position as needed */
+}
+
+.swiper-button-next {
+  right: 10px!important; /* Adjust the right position as needed */
 }
