@@ -1,0 +1,72 @@
+[
+    {
+      "id": 1,
+      "image": "/Product.png",
+      "productName": "Product 1",
+      "price": 10.99,
+      "variant": "Variant A"
+    },
+    {
+      "id": 2,
+      "image": "/Product.png",
+      "productName": "Product 2",
+      "price": 19.99,
+      "variant": "Variant B"
+    },
+    {
+      "id": 3,
+      "image": "/Product.png",
+      "productName": "Product 3",
+      "price": 5.99,
+      "variant": "Variant C"
+    },
+    {
+      "id": 4,
+      "image": "/Product.png",
+      "productName": "Product 4",
+      "price": 8.49,
+      "variant": "Variant D"
+    },
+    {
+      "id": 5,
+      "image": "/Product.png",
+      "productName": "Product 5",
+      "price": 14.99,
+      "variant": "Variant E"
+    },
+    {
+      "id": 6,
+      "image": "/Product.png",
+      "productName": "Product 6",
+      "price": 7.99,
+      "variant": "Variant F"
+    },
+    {
+      "id": 7,
+      "image": "/Product.png",
+      "productName": "Product 7",
+      "price": 12.99,
+      "variant": "Variant G"
+    },
+    {
+      "id": 8,
+      "image": "/Product.png",
+      "productName": "Product 8",
+      "price": 9.99,
+      "variant": "Variant H"
+    },
+    {
+      "id": 9,
+      "image": "/Product.png",
+      "productName": "Product 9",
+      "price": 6.99,
+      "variant": "Variant I"
+    },
+    {
+      "id": 10,
+      "image": "/Product.png",
+      "productName": "Product 10",
+      "price": 11.99,
+      "variant": "Variant J"
+    }
+  ]

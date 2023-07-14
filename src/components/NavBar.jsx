@@ -28,8 +28,8 @@ const NavBar = () => {
   </div>
   <div className="navbar-center w-1/2 relative">
   <CiSearch className="absolute left-2 text-[#008ECC] text-lg" />
-  <input type="text" placeholder="Search essentials, groceries and more..." className="input input-bordered input-info w-5/6 px-8" />
-  <BsListUl className="absolute right-24 text-[#008ECC] text-lg" />
+  <input type="text" placeholder="Search essentials, groceries and more..." className="input input-bordered input-info w-5/6 px-8 w-full mr-4" />
+  <BsListUl className="absolute right-8 text-[#008ECC] text-lg" />
   </div>
   <div className="navbar-end w-1/4 hidden lg:flex gap-4">
   <div className="flex-none flex gap-1 items-center">
