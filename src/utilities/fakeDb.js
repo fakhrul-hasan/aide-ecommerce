@@ -1,10 +1,12 @@
 'use client';
 const getProductCart = ()=>{
     let productCart = {};
-    const storedCart = localStorage.getItem('product-cart');
-    if(storedCart){
-        productCart = JSON.parse(storedCart);
-    }
+    if (typeof window !== 'undefined') {
+        const storedCart = localStorage.getItem('product-cart');
+        if(storedCart){
+            productCart = JSON.parse(storedCart);
+        }
+      }
     return productCart;
 }
 

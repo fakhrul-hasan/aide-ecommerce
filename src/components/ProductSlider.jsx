@@ -82,7 +82,7 @@ const ProductSlider = () => {
       {
         data.map(product=><SwiperSlide key={product.id}>
           <div className='border flex justify-center flex-col w-48 mt-12 bg-gray-100 p-2'>
-          <Image className='mx-auto bg-gray-100' src={product.image} alt="" width={150} height={300} />
+          <Image className='mx-auto bg-gray-100 h-auto w-auto' src={product.image} alt="" width={150} height={300} />
           <p>{product.productName}</p>
           <p className='text-gray-400 text-xs'>{product.variant}</p>
           <h6 className='font-medium text-[#008ECC]'><span className='text-xl'>&#2547;</span>{product.price}</h6>
