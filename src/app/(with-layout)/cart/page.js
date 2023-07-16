@@ -1,7 +1,7 @@
 'use client';
-import UseAuth from '@/hooks/UseAuth';
 import { useRouter } from 'next/navigation';
 import Cart from '@/components/Cart';
+import UseAuth from '@/hooks/useAuth';
 
 const page = () => {
     const {user, loading} = UseAuth();
