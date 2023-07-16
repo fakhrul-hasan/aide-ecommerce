@@ -3,7 +3,7 @@ import React from "react";
 import { CiDiscount1, CiShoppingCart, CiUser, CiSearch, CiLocationOn, CiDeliveryTruck } from "react-icons/ci";
 import { BsListUl } from "react-icons/bs";
 import Link from "next/link";
-import UseAuth from "@/hooks/UseAuth";
+import UseAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 const NavBar = () => {

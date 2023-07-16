@@ -8,7 +8,7 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { decreaseFromCart, getProductCart, handleAddToCart } from '@/utilities/fakeDb';
-import UseAuth from '@/hooks/UseAuth';
+import UseAuth from '@/hooks/useAuth';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
