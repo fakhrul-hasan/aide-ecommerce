@@ -8,10 +8,12 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { decreaseFromCart, getProductCart, handleAddToCart } from '@/utilities/fakeDb';
+import useAuth from '@/hooks/useAuth';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const ProductSlider = () => {
+  const {user} = useAuth();
   const cart = getProductCart();
   const [data, setData] = useState([])
   const [show, setShow] = useState(false);
@@ -20,7 +22,7 @@ const ProductSlider = () => {
     fetch('products.json')
   .then(res=>res.json())
   .then(data=>setData(data))
-  },[show, cart])
+  },[show, cart, user])
 
   const existingCart=(id, price)=>{
     if(cart.hasOwnProperty(id)){
@@ -32,13 +34,13 @@ const ProductSlider = () => {
           <p className='text-xs'>&#2547;<span className='font-medium'>{totalPrice}</span></p>
         </span>
         <span className='flex items-center gap-4'>
-          <button onClick={()=>decreaseFromCart(id)}>-</button>
+          <button onClick={()=>decreaseFromCart(id)} disabled={!user && 'true'}>-</button>
           <p className='text-[#008ecc]'>{cartItem}</p>
-          <button onClick={()=>handleAddToCart(id)} className='text-[#008ecc]'>+</button>
+          <button onClick={()=>handleAddToCart(id)} className='text-[#008ecc]' disabled={!user && 'true'}>+</button>
         </span>
       </span>;
     }else{
-      return <button onClick={()=>handleAddToCart(id)} className='font-medium text-[#008ecc] table-cell align-middle'>Add to cart</button>;
+      return <button onClick={()=>handleAddToCart(id)} className='font-medium text-[#008ecc] table-cell align-middle' disabled={!user && 'true'}>Add to cart</button>;
     }
   }
     
@@ -56,7 +58,7 @@ const ProductSlider = () => {
     <p>{product.productName}</p>
     <p className='text-gray-400 text-xs'>{product.variant}</p>
     <h6 className='font-medium text-[#008ECC]'><span className='text-xl'>&#2547;</span>{product.price}</h6>
-    <span className='border-2 border-[#008ecc] mt-1 text-center h-9'>
+    <span className={user ? 'border-2 border-[#008ecc] mt-1 text-center h-9' : 'tooltip border-2 border-[#008ecc] mt-1 text-center h-9'} data-tip='You have to login first'>
             {
               existingCart(product.id, product.price)
             }
@@ -75,7 +77,7 @@ const ProductSlider = () => {
           <p>{product.productName}</p>
           <p className='text-gray-400 text-xs'>{product.variant}</p>
           <h6 className='font-medium text-[#008ECC]'><span className='text-xl'>&#2547;</span>{product.price}</h6>
-          <span className='border-2 border-[#008ecc] mt-1 text-center h-9'>
+          <span className={user ? 'border-2 border-[#008ecc] mt-1 text-center h-9' : 'tooltip border-2 border-[#008ecc] mt-1 text-center h-9'} data-tip='You have to login first'>
             {
               existingCart(product.id, product.price)
             }
