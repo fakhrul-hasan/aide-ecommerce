@@ -52,14 +52,12 @@ const NavBar = () => {
         <div className="flex-none flex gap-1 items-center">
         <CiUser className="text-[#008ECC] text-lg" />
         {
-          user ? <p className="text-xs font-thin">{user?.email}</p> : <Link href="/signIn" className="text-sm font-medium">Sign Up/Sign in</Link>
+          user ? <p onClick={logOut} className="text-sm font-medium cursor-pointer">Sign out</p> : <Link href="/signIn" className="text-sm font-medium">Sign Up/Sign in</Link>
         }
         </div>
         <div className="flex-none flex gap-1 items-center">
         <CiUser className="text-[#008ECC] text-lg" />
-        {
-          user ? <p onClick={handleLogOut} className="text-sm font-medium cursor-pointer">Sign out</p> : <a href="#" className="text-sm font-medium">Admin</a>
-        }
+          <Link href="/dashboard" className="text-sm font-medium">Admin</Link>
         </div>
   </div>
 </div>
