@@ -72,7 +72,7 @@ const EmployeeTable = () => {
           checked={columnVisibility.plan}
           onChange={() => handleCheckboxChange('plan')}
         />
-        Role
+        Plan
       </label>
       <label>
         <input
@@ -80,7 +80,7 @@ const EmployeeTable = () => {
           checked={columnVisibility.status}
           onChange={() => handleCheckboxChange('status')}
         />
-        Role
+        Status
       </label>
       <label>
         <input
@@ -88,7 +88,7 @@ const EmployeeTable = () => {
           checked={columnVisibility.action}
           onChange={() => handleCheckboxChange('action')}
         />
-        Role
+        Action
       </label>
     </div>
   );
