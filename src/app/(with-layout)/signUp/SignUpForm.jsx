@@ -1,6 +1,6 @@
 'use client';
 
-import useAuth from "@/hooks/useAuth";
+import UseAuth from "@/hooks/UseAuth";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -12,7 +12,7 @@ const SignUpForm = () => {
     reset,
     formState: {errors}
     } = useForm();
-    const {createUser} = useAuth();
+    const {createUser} = UseAuth();
     const onSubmit = (data)=>{
         console.log(data);
         createUser(data.email, data.password)

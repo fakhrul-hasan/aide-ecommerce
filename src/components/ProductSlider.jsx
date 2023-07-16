@@ -8,12 +8,12 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { decreaseFromCart, getProductCart, handleAddToCart } from '@/utilities/fakeDb';
-import useAuth from '@/hooks/useAuth';
+import UseAuth from '@/hooks/UseAuth';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 const ProductSlider = () => {
-  const {user} = useAuth();
+  const {user} = UseAuth();
   const cart = getProductCart();
   const [data, setData] = useState([])
   const [show, setShow] = useState(false);

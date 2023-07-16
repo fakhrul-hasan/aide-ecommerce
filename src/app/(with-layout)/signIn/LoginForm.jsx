@@ -1,5 +1,5 @@
 'use client';
-import useAuth from '@/hooks/useAuth';
+import UseAuth from '@/hooks/UseAuth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -14,7 +14,7 @@ const LoginForm = () => {
         reset,
         formState: {errors}
         } = useForm();
-        const {signIn} = useAuth();
+        const {signIn} = UseAuth();
         const onSubmit = (data)=>{
             console.log(data);
             signIn(data.email, data.password)

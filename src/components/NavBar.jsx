@@ -3,12 +3,12 @@ import React from "react";
 import { CiDiscount1, CiShoppingCart, CiUser, CiSearch, CiLocationOn, CiDeliveryTruck } from "react-icons/ci";
 import { BsListUl } from "react-icons/bs";
 import Link from "next/link";
-import useAuth from "@/hooks/useAuth";
+import UseAuth from "@/hooks/UseAuth";
 import { useRouter } from "next/navigation";
 
 const NavBar = () => {
   const router = useRouter();
-  const {user, logOut} = useAuth();
+  const {user, logOut} = UseAuth();
   const handleLogOut=()=>{
     logOut()
     .then(()=>{
