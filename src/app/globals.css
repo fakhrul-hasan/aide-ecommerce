@@ -26,3 +26,11 @@
 .swiper-button-next {
   right: 10px!important; /* Adjust the right position as needed */
 }
+.pagination ul{
+  width: 100%;
+}
+@media print {
+  #nonPrint {
+    display: none;
+  }
+}
