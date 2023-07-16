@@ -1,11 +1,9 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Cart from '@/components/Cart';
 import UseAuth from '@/hooks/useAuth';
 
 const page = () => {
     const {user, loading} = UseAuth();
-    const router = useRouter();
     if(loading){
         return <div className='mx-auto font-medium text-lg'>Loading...</div>
     }
@@ -15,7 +13,7 @@ const page = () => {
         )
     }
     if (typeof window !== 'undefined') {
-        router.push('/signIn');
+        return window.location.href = '/signIn';
       }
     
       return null;
