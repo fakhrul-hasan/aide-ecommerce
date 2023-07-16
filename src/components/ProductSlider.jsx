@@ -7,7 +7,7 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { decreaseFromCart, getProductCart } from '@/utilities/fakeDb';
+import { decreaseFromCart, getProductCart, handleAddToCart } from '@/utilities/fakeDb';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -22,17 +22,6 @@ const ProductSlider = () => {
   .then(data=>setData(data))
   },[show, cart])
 
-  const handleAddToCart = (id) =>{
-    let productCart = getProductCart();
-    const quantity = productCart[id];
-    if(!quantity){
-      productCart[id] = 1;
-    }else{
-      const newQuantity = quantity +1;
-      productCart[id] = newQuantity;
-    }
-    localStorage.setItem('product-cart', JSON.stringify(productCart));
-  }
   const existingCart=(id, price)=>{
     if(cart.hasOwnProperty(id)){
       const cartItem = cart[id];

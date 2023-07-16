@@ -37,7 +37,7 @@ const NavBar = () => {
       </div>
       <div className="navbar p-0">
   <div className="navbar-start w-1/4">
-    <a className="normal-case text-xl cursor-pointer text-[#008ECC] font-medium">Fakhrul Mart</a>
+    <Link href='/' className="normal-case text-xl cursor-pointer text-[#008ECC] font-medium">Fakhrul Mart</Link>
   </div>
   <div className="navbar-center w-1/2 relative">
   <CiSearch className="absolute left-2 text-[#008ECC] text-lg" />

@@ -10,6 +10,18 @@ const getProductCart = ()=>{
     return productCart;
 }
 
+const handleAddToCart = (id) =>{
+    let productCart = getProductCart();
+    const quantity = productCart[id];
+    if(!quantity){
+      productCart[id] = 1;
+    }else{
+      const newQuantity = quantity +1;
+      productCart[id] = newQuantity;
+    }
+    localStorage.setItem('product-cart', JSON.stringify(productCart));
+  }
+
 const decreaseFromCart = id =>{
     let productCart = getProductCart();
     const quantity = productCart[id];
@@ -32,6 +44,7 @@ const removeFromCart = id =>{
 
 export{
     getProductCart,
+    handleAddToCart,
     decreaseFromCart,
     removeFromCart,
 }
