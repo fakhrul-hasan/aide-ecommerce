@@ -1,5 +1,4 @@
 'use client';
-
 import UseAuth from "@/hooks/useAuth";
 import Link from "next/link";
 import { useForm } from "react-hook-form";

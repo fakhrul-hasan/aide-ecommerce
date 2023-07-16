@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import SignUpForm from './SignUpForm';
 import { Toaster } from 'react-hot-toast';
