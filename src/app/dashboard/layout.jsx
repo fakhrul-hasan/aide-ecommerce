@@ -1,3 +1,4 @@
+import DashboardNav from "@/components/DashboardNav";
 import SideDrawer from "@/components/SideDrawer";
 import React from "react";
 
@@ -7,7 +8,10 @@ const DashboardLayout = ({ children }) => {
     <html lang="en">
       <body className="flex">
         <SideDrawer />
+        <section>
+          <DashboardNav />
         {children}
+        </section>
       </body>
     </html>
   );

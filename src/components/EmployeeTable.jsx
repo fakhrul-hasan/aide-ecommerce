@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import Image from "next/image";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useReactToPrint } from 'react-to-print';
+import Link from "next/link";
 
 const EmployeeTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -41,50 +42,56 @@ const EmployeeTable = () => {
   };
 
   const dropdownMenu = (
-    <div className="dropdown-menu" style={{ display: dropdownOpen ? 'block' : 'none' }}>
-      <label>
+    <div className="shadow dropdown-content p-[23px] z-[1] bg-gray-200 absolute left-[274px] top-14" style={{ display: dropdownOpen ? 'block' : 'none' }}>
+      <label className="">
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.employeeName}
           onChange={() => handleCheckboxChange('employeeName')}
         />
         Employee Name
-      </label>
+      </label><br />
       <label>
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.email}
           onChange={() => handleCheckboxChange('email')}
         />
         Email
-      </label>
+      </label><br />
       <label>
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.role}
           onChange={() => handleCheckboxChange('role')}
         />
         Role
-      </label>
+      </label><br />
       <label>
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.plan}
           onChange={() => handleCheckboxChange('plan')}
         />
         Plan
-      </label>
+      </label><br />
       <label>
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.status}
           onChange={() => handleCheckboxChange('status')}
         />
         Status
-      </label>
+      </label><br />
       <label>
         <input
           type="checkbox"
+          id="cb"
           checked={columnVisibility.action}
           onChange={() => handleCheckboxChange('action')}
         />
@@ -140,22 +147,25 @@ const EmployeeTable = () => {
   })
   return (
     <>
-      <div className="flex gap-4 my-2">
+      <div className="flex justify-between my-2 relative">
+        <div className="flex gap-4">
         <button
           className="flex items-center gap-1 border px-2 py-1"
           onClick={handleExportToPDF}
         >
           <CiExport /> PDF
         </button>
+        <button>
         <DownloadTableExcel
           filename="users table"
           sheet="users"
           currentTableRef={tableRef.current}
         >
-          <button className="flex items-center gap-1 border px-2 py-1">
+          <span className="flex items-center gap-1 border px-2 py-3">
             <CiExport /> EXCEL
-          </button>
+          </span>
         </DownloadTableExcel>
+          </button>
           <button onClick={handlePrint} className="flex items-center gap-1 border px-2 py-1">
             <CiExport /> PRINT
           </button>
@@ -163,12 +173,14 @@ const EmployeeTable = () => {
         SHOW/HIDE COLUMN
       </button>
       {dropdownMenu}
+        </div>
+        <Link href='/addEmployee' className="btn bg-violet-600 hover:bg-violet-800 text-white">+add new employee</Link>
       </div>
       <div className="overflow-x-auto">
-        <table className="table" ref={tableRef}>
+        <table className="table bg-base-200" ref={tableRef}>
           {/* head */}
           <thead>
-            <tr>
+            <tr id="tr-head">
             {columnVisibility.employeeName && <th>Employee Name</th>}
             {columnVisibility.email && <th>Email</th>}
             {columnVisibility.role && <th>Role</th>}
@@ -179,7 +191,7 @@ const EmployeeTable = () => {
           </thead>
           <tbody>
             {currentEmployees.map((employee, index) => (
-              <tr key={index}>
+              <tr key={index} className="hover:bg-base-100 border-b las border-slate-900">
                 {
                   columnVisibility.employeeName && <td>
                   <div className="flex items-center space-x-3">
@@ -215,7 +227,7 @@ const EmployeeTable = () => {
                       "bg-green-100 text-green-500"
                     } ${
                       employee.status === "Inactive" &&
-                      "bg-gray-100 text-gray-500"
+                      "bg-red-100 text-red-500"
                     }`}
                   >
                     {employee.status}

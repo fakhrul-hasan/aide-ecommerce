@@ -29,6 +29,15 @@
 .pagination ul{
   width: 100%;
 }
+#cb{
+  accent-color: #008ecc;
+}
+tr:last-child {
+  border-bottom: none;
+}
+#tr-head{
+  border-bottom: 1px solid black;
+}
 @media print {
   #nonPrint {
     display: none;
