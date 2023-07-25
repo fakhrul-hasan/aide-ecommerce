@@ -5,7 +5,7 @@ import { CiBellOn, CiDark, CiUser } from "react-icons/ci";
 const DashboardNav = () => {
     const {logOut} = UseAuth();
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 navbar-end w-full">
   <div className="flex-1 justify-end">
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle">

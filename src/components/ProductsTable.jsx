@@ -9,19 +9,24 @@ import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useReactToPrint } from 'react-to-print';
 import Link from "next/link";
 
-const EmployeeTable = () => {
+const ProductsTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
-  const [employees, setEmployees] = useState([]);
+  const [products, setProducts] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({
-    employeeName: true,
-    email: true,
-    role: true,
-    plan: true,
-    status: true,
+    image: true,
+    productName: true,
+    variant: true,
+    price: true,
     action: true,
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    fetch("/products.json")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   const handleCheckboxChange = (column) => {
     setColumnVisibility((prevState) => ({
@@ -47,46 +52,37 @@ const EmployeeTable = () => {
         <input
           type="checkbox"
           id="cb"
-          checked={columnVisibility.employeeName}
-          onChange={() => handleCheckboxChange('employeeName')}
+          checked={columnVisibility.image}
+          onChange={() => handleCheckboxChange('image')}
         />
-        Employee Name
+        Image
       </label><br />
       <label>
         <input
           type="checkbox"
           id="cb"
-          checked={columnVisibility.email}
-          onChange={() => handleCheckboxChange('email')}
+          checked={columnVisibility.productName}
+          onChange={() => handleCheckboxChange('productName')}
         />
-        Email
+        Product Name
       </label><br />
       <label>
         <input
           type="checkbox"
           id="cb"
-          checked={columnVisibility.role}
-          onChange={() => handleCheckboxChange('role')}
+          checked={columnVisibility.variant}
+          onChange={() => handleCheckboxChange('variant')}
         />
-        Role
+        Weight
       </label><br />
       <label>
         <input
           type="checkbox"
           id="cb"
-          checked={columnVisibility.plan}
-          onChange={() => handleCheckboxChange('plan')}
+          checked={columnVisibility.price}
+          onChange={() => handleCheckboxChange('price')}
         />
-        Plan
-      </label><br />
-      <label>
-        <input
-          type="checkbox"
-          id="cb"
-          checked={columnVisibility.status}
-          onChange={() => handleCheckboxChange('status')}
-        />
-        Status
+        Price
       </label><br />
       <label>
         <input
@@ -100,14 +96,9 @@ const EmployeeTable = () => {
     </div>
   );
   const tableRef = useRef(null);
-  useEffect(() => {
-    fetch("employee.json")
-      .then((res) => res.json())
-      .then((data) => setEmployees(data));
-  }, []);
   
-  const pageCount = Math.ceil(employees.length / pageSize);
-  const currentEmployees = employees.slice(
+  const pageCount = Math.ceil(products.length / pageSize);
+  const currentProducts = products.slice(
     currentPage * pageSize,
     currentPage * pageSize + pageSize
   );
@@ -119,47 +110,30 @@ const EmployeeTable = () => {
     setPageSize(size);
     setCurrentPage(0);
   };
-  const handleExportToPDF = async () => {
+  const handleExportToPDF = () => {
     const input = tableRef.current;
     const iconElements = input.querySelectorAll("#nonPrint");
     iconElements.forEach((iconElement) => {
       iconElement.style.display = "none";
     });
-  
-    // Add a div element for the header in the HTML content
-    // input.style.position = "relative";
-  const headerDiv = document.createElement("div");
-  headerDiv.innerHTML = `
-  <h2 style="font-size:30px; font-weight:bold;">All Employees</h2>
-  <h5 style="font-size:16px; font-weight:600;">Prepared By: Md Fakhrul Hasan</h5>
-  `;
-  headerDiv.style.textAlign = "center";
-  headerDiv.style.color = "#9155fd";
-  headerDiv.style.marginBottom = "20px";
-  input.insertBefore(headerDiv, input.firstChild);
-  
-    const canvas = await html2canvas(input);
-  
-    // Remove the header after capturing the canvas
-    input.removeChild(headerDiv);
-  
-    const pdf = new jsPDF("p", "pt");
-    const imgData = canvas.toDataURL("image/png");
-  
-    const width = pdf.internal.pageSize.getWidth();
-    const height = pdf.internal.pageSize.getHeight();
-  
-    // Add image to PDF excluding specific part
-    pdf.addImage(imgData, "PNG", 0, 0, width, height);
-  
-    // Save PDF
-    pdf.save("employee_table.pdf");
-    iconElements.forEach((iconElement) => {
-      iconElement.style.display = "";
+
+    html2canvas(input).then((canvas) => {
+      const pdf = new jsPDF("p", "pt");
+      const imgData = canvas.toDataURL("image/png");
+
+      const width = pdf.internal.pageSize.getWidth();
+      const height = pdf.internal.pageSize.getHeight();
+
+      // Add image to PDF excluding specific part
+      pdf.addImage(imgData, "PNG", 0, 0, width, height);
+
+      // Save PDF
+      pdf.save("employee_table.pdf");
+      iconElements.forEach((iconElement) => {
+        iconElement.style.display = "";
+      });
     });
   };
-  
-  
   const handlePrint = useReactToPrint({
     content: () => tableRef.current,
   })
@@ -192,66 +166,42 @@ const EmployeeTable = () => {
       </button>
       {dropdownMenu}
         </div>
-        <input className="input input-bordered mx-2" placeholder="Search Invoice" type="text" name="" id="" />
-        <Link href='dashboard/addEmployee' className="btn bg-violet-600 hover:bg-violet-800 text-white">add employee</Link>
+        <Link href='dashboard/addEmployee' className="btn bg-violet-600 hover:bg-violet-800 text-white">+add new product</Link>
       </div>
-      <div className="overflow-x-auto" ref={tableRef}>
-        <table className="table bg-base-200">
+      <div className="overflow-x-auto">
+        <table className="table bg-base-200" ref={tableRef}>
           {/* head */}
           <thead>
             <tr id="tr-head">
-            {columnVisibility.employeeName && <th>Employee Name</th>}
-            {columnVisibility.email && <th>Email</th>}
-            {columnVisibility.role && <th>Role</th>}
-            {columnVisibility.plan && <th>Plan</th>}
-            {columnVisibility.status && <th>Status</th>}
+            {columnVisibility.image && <th>Image</th>}
+            {columnVisibility.productName && <th>Product Name</th>}
+            {columnVisibility.variant && <th>Weight</th>}
+            {columnVisibility.price && <th>Price</th>}
             {columnVisibility.action && <th id="nonPrint">Action</th>}
             </tr>
           </thead>
           <tbody>
-            {currentEmployees.map((employee, index) => (
-              <tr key={index} className="hover:bg-base-100 border-b las border-slate-900">
+            {currentProducts.map((product) => (
+              <tr key={product.id} className="hover:bg-base-100 border-b las border-slate-900">
                 {
-                  columnVisibility.employeeName && <td>
+                  columnVisibility.image && <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <Image
-                          src={employee.image}
+                          src={product.image}
                           alt="Avatar Tailwind CSS Component"
                           width={20}
                           height={20}
                         />
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">{employee.name}</div>
-                      <div className="text-sm opacity-50">
-                        {employee.mobile}
-                      </div>
-                    </div>
                   </div>
                 </td>
                 }
-                {columnVisibility.email && <td>{employee.email}</td>}
-                {columnVisibility.role && <td>{employee.role}</td>}
-                {columnVisibility.plan && <td>{employee.plan}</td>}
-                {columnVisibility.status && <td>
-                  <span
-                    className={`py-1 px-2 text-xs rounded-full ${
-                      employee.status === "Pending" &&
-                      "bg-yellow-100 text-yellow-500"
-                    } ${
-                      employee.status === "Active" &&
-                      "bg-green-100 text-green-500"
-                    } ${
-                      employee.status === "Inactive" &&
-                      "bg-red-100 text-red-500"
-                    }`}
-                  >
-                    {employee.status}
-                  </span>
-                </td>}
+                {columnVisibility.productName && <td>{product.productName}</td>}
+                {columnVisibility.variant && <td>{product.variant}</td>}
+                {columnVisibility.price && <td>{product.price}</td>}
                 {columnVisibility.action && <th id="nonPrint">
                   <button className="btn btn-ghost btn-xs">
                     <CiMenuKebab />
@@ -287,4 +237,4 @@ const EmployeeTable = () => {
   );
 };
 
-export default EmployeeTable;
+export default ProductsTable;

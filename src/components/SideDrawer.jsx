@@ -30,17 +30,17 @@ const SideDrawer = () => {
             <summary className="w-full flex items-center justify-center gap-2"><BsClipboard /></summary>
             <ul className="p-2 rounded-box shadow dropdown-content z-[1] bg-gray-400 w-52 left-10">
               <li>
-                <a>Sub Menu-1</a>
+                <Link href='/dashboard'>Sub Menu-1</Link>
               </li>
               <li>
                 <a>Sub Menu-3</a>
               </li>
             </ul>
           </details>
-          <Link href="#" className="flex items-center justify-center">
+          <Link href="/dashboard/addEmployee" className="flex items-center justify-center">
             <CiUser />
           </Link>
-          <Link href="#" className="flex items-center justify-center">
+          <Link href="/dashboard/products" className="flex items-center justify-center">
             <MdOutlineContentCopy />
           </Link>
         </div>
@@ -50,17 +50,17 @@ const SideDrawer = () => {
             <summary className="w-full flex items-center gap-2"><BsClipboard /> All Employees <MdKeyboardArrowDown /></summary>
             <ul className="p-2 rounded-box inline-block">
               <li>
-                <a>Sub Menu-1</a>
+                <Link href='/dashboard'>Sub Menu-1</Link>
               </li>
               <li>
                 <a>Sub Menu-3</a>
               </li>
             </ul>
           </details>
-          <Link href="/addEmployee" className="flex items-center gap-2">
+          <Link href="/dashboard/addEmployee" className="flex items-center gap-2">
             <CiUser /> Add Employee
           </Link>
-          <Link href="/products" className="flex items-center gap-2">
+          <Link href="/dashboard/products" className="flex items-center gap-2">
             <MdOutlineContentCopy /> All Products
           </Link>
         </div>
