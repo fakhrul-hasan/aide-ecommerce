@@ -43,3 +43,14 @@ tr:last-child {
     display: none;
   }
 }
+@media screen {
+  .print-header {
+    display: none;
+  }
+}
+
+@media print {
+  .print-header {
+    display: block;
+  }
+}

@@ -8,6 +8,7 @@ import Image from "next/image";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useReactToPrint } from 'react-to-print';
 import Link from "next/link";
+import Header from "./Header";
 
 const EmployeeTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -126,8 +127,6 @@ const EmployeeTable = () => {
       iconElement.style.display = "none";
     });
   
-    // Add a div element for the header in the HTML content
-    // input.style.position = "relative";
   const headerDiv = document.createElement("div");
   headerDiv.innerHTML = `
   <h2 style="font-size:30px; font-weight:bold;">All Employees</h2>
@@ -159,7 +158,7 @@ const EmployeeTable = () => {
     });
   };
   
-  
+
   const handlePrint = useReactToPrint({
     content: () => tableRef.current,
   })
@@ -196,6 +195,9 @@ const EmployeeTable = () => {
         <Link href='dashboard/addEmployee' className="btn bg-violet-600 hover:bg-violet-800 text-white">add employee</Link>
       </div>
       <div className="overflow-x-auto" ref={tableRef}>
+      <div className="print-header">
+        <Header text='All Employees' />
+      </div>
         <table className="table bg-base-200">
           {/* head */}
           <thead>
@@ -261,7 +263,7 @@ const EmployeeTable = () => {
             ))}
           </tbody>
         </table>
-        <div className="flex justify-end items-center">
+        <div id="nonPrint" className="flex justify-end items-center">
           <label htmlFor="pageSize">Rows per page: </label>
           <select
             id="pageSize"

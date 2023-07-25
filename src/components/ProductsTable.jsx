@@ -8,6 +8,7 @@ import Image from "next/image";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useReactToPrint } from 'react-to-print';
 import Link from "next/link";
+import Header from "./Header";
 
 const ProductsTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -110,28 +111,41 @@ const ProductsTable = () => {
     setPageSize(size);
     setCurrentPage(0);
   };
-  const handleExportToPDF = () => {
+  const handleExportToPDF = async () => {
     const input = tableRef.current;
     const iconElements = input.querySelectorAll("#nonPrint");
     iconElements.forEach((iconElement) => {
       iconElement.style.display = "none";
     });
-
-    html2canvas(input).then((canvas) => {
-      const pdf = new jsPDF("p", "pt");
-      const imgData = canvas.toDataURL("image/png");
-
-      const width = pdf.internal.pageSize.getWidth();
-      const height = pdf.internal.pageSize.getHeight();
-
-      // Add image to PDF excluding specific part
-      pdf.addImage(imgData, "PNG", 0, 0, width, height);
-
-      // Save PDF
-      pdf.save("employee_table.pdf");
-      iconElements.forEach((iconElement) => {
-        iconElement.style.display = "";
-      });
+  
+  const headerDiv = document.createElement("div");
+  headerDiv.innerHTML = `
+  <h2 style="font-size:30px; font-weight:bold;">All Products</h2>
+  <h5 style="font-size:16px; font-weight:600;">Prepared By: Md Fakhrul Hasan</h5>
+  `;
+  headerDiv.style.textAlign = "center";
+  headerDiv.style.color = "#9155fd";
+  headerDiv.style.marginBottom = "20px";
+  input.insertBefore(headerDiv, input.firstChild);
+  
+    const canvas = await html2canvas(input);
+  
+    // Remove the header after capturing the canvas
+    input.removeChild(headerDiv);
+  
+    const pdf = new jsPDF("p", "pt");
+    const imgData = canvas.toDataURL("image/png");
+  
+    const width = pdf.internal.pageSize.getWidth();
+    const height = pdf.internal.pageSize.getHeight();
+  
+    // Add image to PDF excluding specific part
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
+  
+    // Save PDF
+    pdf.save("product_table.pdf");
+    iconElements.forEach((iconElement) => {
+      iconElement.style.display = "";
     });
   };
   const handlePrint = useReactToPrint({
@@ -168,8 +182,11 @@ const ProductsTable = () => {
         </div>
         <Link href='dashboard/addEmployee' className="btn bg-violet-600 hover:bg-violet-800 text-white">+add new product</Link>
       </div>
-      <div className="overflow-x-auto">
-        <table className="table bg-base-200" ref={tableRef}>
+      <div className="overflow-x-auto" ref={tableRef}>
+      <div className="print-header">
+        <Header text='All Products' />
+      </div>
+        <table className="table bg-base-200">
           {/* head */}
           <thead>
             <tr id="tr-head">
@@ -211,7 +228,7 @@ const ProductsTable = () => {
             ))}
           </tbody>
         </table>
-        <div className="flex justify-end items-center">
+        <div id="nonPrint" className="flex justify-end items-center">
           <label htmlFor="pageSize">Rows per page: </label>
           <select
             id="pageSize"
